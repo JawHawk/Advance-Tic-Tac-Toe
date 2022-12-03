@@ -10,12 +10,14 @@ class Box extends Component {
       }
     }
   render() {
-    const { status , size} = this.props
+    const {status ,size} = this.props
     const boxStyle = {
         width:'90px',
         height:'90px',
         border:'1px solid black',
-        margin:'15px'
+        margin:'15px',
+        padding:'5px',
+        cursor:'pointer',
     }
     const imgStyle = {
         width:size,
@@ -23,9 +25,9 @@ class Box extends Component {
     }
     
     return (
-      <div>
-        {status === 'circle'  && <div style={boxStyle}><img alt='circle' style={imgStyle} src={circle}></img></div>}
-        {status === 'cross' && <div style={boxStyle}><img alt='cross' style={imgStyle} src={cross}></img></div>}
+      <div style={boxStyle}>
+        {status === 'circle' && <img alt='circle' style={imgStyle} src={circle}></img> }
+        {status === 'cross' && <img alt='cross' style={imgStyle} src={cross}></img> }
       </div>
     )
   }
