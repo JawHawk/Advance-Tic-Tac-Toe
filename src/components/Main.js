@@ -9,25 +9,36 @@ class Main extends Component {
   
     this.state = {
       turn:'circle',
-      choice: null
+      choice: null,
     }
   }
 
-  changeTurn = () => {
+  changeTurn = (status,size) => {
     const {turn , choice} = this.state
-    if (choice !== null) {
-    turn === 'circle' ? this.setState({turn : 'cross'})
-    : this.setState({turn : 'circle'})
 
-    this.setState({choice:null})
+    if (choice !== null && status !== turn) {
+      if (size === null || (choice-1)>size ) {
+        turn === 'circle' ? this.setState({turn : 'cross',choice:null}) 
+        : this.setState({turn : 'circle',choice:null})
+
+
+        return [true,turn,choice]
+      } else {
+        console.log('Select greater size');
+        return [false,turn,choice]
+      }
     } else {
       console.log('Select something');
+      return [false,turn,choice]
     }
   }
 
-  makeChoice = n => {
-    console.log(n);
+  makeChoice = (n,turnn) => {
+    if (this.state.turn === turnn) {
     this.setState({choice:n})
+    } else {
+      console.log('Its',this.state.turn,'turn');
+    } 
   }
 
   render() {
@@ -39,10 +50,10 @@ class Main extends Component {
         width:'100vw'
     }
 
-    const { turn } = this.state
+    const { turn , choice} = this.state
     return (
       <div >
-        <h2>Turn of {turn}</h2>
+        <h2>Turn of {turn} with selected {!choice ? 'Nothing' :  turn + choice}</h2>
         <div style={mainStyle}>
             <LeftSideBar makeChoice={this.makeChoice}/>
             <Board changeTurn={this.changeTurn}/>
