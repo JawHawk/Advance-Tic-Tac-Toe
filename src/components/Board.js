@@ -1,25 +1,31 @@
 import React, { Component } from 'react'
 import Box from './Box'
+import ResetContext from './resetContext'
+
+const initialState = {
+  elements : elementConstructor(), //for box props
+  board:[null,null,null,null,null,null,null,null,null] // board fillings
+}
+
+function elementConstructor(){
+  const elements = []
+  for (let i = 0; i <= 8; i++) {
+    elements.push({ id:i, status : null, size : null })
+  }
+  return elements
+} 
 
 class Board extends Component {
     constructor(props) {
       super(props)
-      this.state = {
-        elements : [], //for box props
-        board:[null,null,null,null,null,null,null,null,null] // board fillings
-      }
+      this.state = {elements:[...initialState.elements],board:[...initialState.board]}
     }
-
-  componentDidMount() {
-    const items = []
-    for (let i = 0; i <= 8; i++) {
-      const el = { id:i,
-        status : null,
-        size : null,
-        }
-      items.push(el)
+  
+  componentDidUpdate(){
+    if (this.context === true){
+      this.setState({elements:[...initialState.elements],board:[...initialState.board]})
+      console.log('Board update');
     }
-    this.setState({elements:items})
   }
 
   boxClick = n => {
@@ -29,10 +35,10 @@ class Board extends Component {
       elements[n] = {
         id: n,
         status: turn,
-        size: choice-1
+        size: choice
       }
       board[n] = turn
-      this.setState({elements:elements,board:board},()=>console.log(this.state.board))
+      this.setState({elements:elements,board:board},()=>{this.props.checkWin(board)})
     } 
     
   }
@@ -50,11 +56,12 @@ class Board extends Component {
         <h2>Board</h2>
         <div style={grid}>
             {elements.map(el => <div key={el.id} onClick={()=>{this.boxClick(el.id)}}>
-              <Box status={el.status} size={el.size}/> </div>)}
+              <Box status={el.status} highlight={false} size={el.size}/> </div>)}
         </div>
       </div>
     )
   }
 }
 
+Board.contextType = ResetContext
 export default Board

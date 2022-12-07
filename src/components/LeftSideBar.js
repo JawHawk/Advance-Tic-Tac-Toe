@@ -3,13 +3,20 @@ import SideBar from './SideBar'
 
 class LeftSideBar extends Component {
   select = n => {
-    this.props.makeChoice(n,'circle')
+    const {turn,makeChoice} = this.props
+        if(turn === 'circle'){
+          makeChoice(n)
+          return true
+        } else {
+          console.log('Its',turn,'turn');
+          return false
+        }
   }
 
   render() {
     return(
         <div>
-            <SideBar side='left' select={this.select}/>
+            <SideBar side='left' select={this.select} moves={this.props.lmoves}/>
         </div>
     )
   }
