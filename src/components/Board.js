@@ -2,29 +2,25 @@ import React, { Component } from 'react'
 import Box from './Box'
 import ResetContext from './resetContext'
 
-const initialState = {
-  elements : elementConstructor(), //for box props
-  board:[null,null,null,null,null,null,null,null,null] // board fillings
-}
-
-function elementConstructor(){
+function initialState(){
   const elements = []
+  const board = []
   for (let i = 0; i <= 8; i++) {
     elements.push({ id:i, status : null, size : null })
+    board.push(null)
   }
-  return elements
+  return {elements, board}
 } 
 
 class Board extends Component {
     constructor(props) {
       super(props)
-      this.state = {elements:[...initialState.elements],board:[...initialState.board]}
+      this.state = initialState()
     }
   
   componentDidUpdate(){
     if (this.context === true){
-      this.setState({elements:[...initialState.elements],board:[...initialState.board]})
-      console.log('Board update');
+      this.setState(initialState())
     }
   }
 

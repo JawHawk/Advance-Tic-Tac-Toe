@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Box from './Box'
 import ResetContext from './resetContext'
+import '../css/sidebar.css'
 
-const initialState = {
-  choice : null
+function initialState(){
+  return {choice:null}
 }
 
 class SideBar extends Component {
@@ -11,13 +12,13 @@ class SideBar extends Component {
     super(props)
     
     this.state = {
-      choice: {...initialState}
+      choice: initialState()
     }
   }
 
   componentDidUpdate(){
     if (this.context === true){
-      this.setState({...initialState})
+      this.setState(initialState())
     }
   }
 
@@ -27,10 +28,6 @@ class SideBar extends Component {
       }
   }
   render() {
-    const divStyle = {
-      display:'flex',
-      gap:'10px'
-    }
     const size = [0,1,2,3]
 
     const { choice } = this.state    
@@ -41,12 +38,14 @@ class SideBar extends Component {
     
     return (
       <div>
-        <h2>{side} SideBar</h2>
-        {size.map((item,ind) => 
-          <div style={divStyle} onClick={()=>{this.selection(ind)}} key={ind}>
-                <Box status={status} highlight={ind === choice ? true : false} size={item} />
-                <h3>{moves[ind]}</h3>
-          </div> )}
+        <h2>{status} | Moves</h2>
+        <div className='SBparent'>
+          {size.map((item,ind) => 
+            <div className='SBchild' onClick={()=>{this.selection(ind)}} key={ind}>
+                  <Box status={status} highlight={ind === choice ? true : false} size={item} />
+                  <h2>{moves[ind]}</h2>
+            </div> )}
+        </div>
       </div>
     )
   }

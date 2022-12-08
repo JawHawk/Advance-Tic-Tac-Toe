@@ -4,8 +4,8 @@ import Home from './components/Home';
 function App() {
   return (
     <div className="App">
-      {/* <Main /> */}
       <Home />
+      <p>Made by chinmay aka ~jawhawk</p>
     </div>
   );
 }

@@ -23,11 +23,14 @@ class Box extends Component {
     const {sizes} = this.state
     const {status, highlight ,size} = this.props
     const boxStyle = {
-        width:'90px',
-        height:'90px',
+        width:'15vw',
+        height:'15vw',
+        maxWidth:'90px',
+        maxHeight:'90px',
         border:'1px solid black',
         padding:'5px',
         cursor:'pointer',
+        borderRadius:'10px',
     }
     if(highlight){
       boxStyle['border'] = '2px solid blue'

@@ -1,0 +1,23 @@
+.parent{
+    display:flex;
+    text-align: center;
+    flex-direction: column;
+    height: 85vh;
+}
+
+.child{
+display: flex;
+flex-direction: row;
+gap: 50px;
+justify-content: space-between;
+padding: 40px;
+}
+
+@media only screen and (max-width: 830px) {
+    .child{
+        flex-direction: column;
+    }
+    .parent{
+        height: max-content;
+    }
+  }
