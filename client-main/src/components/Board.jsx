@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Box from './Box'
-import ResetContext from './resetContext'
+import ResetContext from '../pages/resetContext'
 
 function initialState(){
   const elements = []
@@ -18,13 +18,24 @@ class Board extends Component {
       this.state = initialState()
     }
   
+  componentDidMount() {
+    const {socket} = this.context;
+    socket.on('move-update',({elements, board})=> {
+      this.props.changeTurnSocket(elements);
+      this.setState({elements: elements, board: board},()=>{
+        this.props.checkWin(board);
+      });
+    })
+  } 
+
   componentDidUpdate(){
-    if (this.context === true){
+    if (this.context.reset === true){
       this.setState(initialState())
     }
   }
 
   boxClick = n => {
+    const { socket, roomId } = this.context 
     var {elements,board} = this.state
     const [flag,turn,choice] = this.props.changeTurn(elements[n].status,elements[n].size);
     if (flag) {
@@ -34,7 +45,10 @@ class Board extends Component {
         size: choice
       }
       board[n] = turn
-      this.setState({elements:elements,board:board},()=>{this.props.checkWin(board)})
+      this.setState({elements:elements,board:board},()=>{
+        socket.emit('move-done',{roomId: roomId, elements: elements, board: board});
+        this.props.checkWin(board);
+      })
     } 
     
   }
@@ -45,13 +59,11 @@ class Board extends Component {
         gap:'25px',
         gridTemplateColumns:'repeat(3, 1fr)'
     }
-
     const {elements} = this.state
     return (
-      <div>
-        <h2>Board</h2>
+      <div className='d-flex flex-column justify-content-center'>
         <div style={grid}>
-            {elements.map(el => <div key={el.id} onClick={()=>{this.boxClick(el.id)}}>
+            {elements.map(el => <div key={el.id} className='d-flex justify-content-center' onClick={()=>{this.boxClick(el.id)}}>
               <Box status={el.status} highlight={false} size={el.size}/> </div>)}
         </div>
       </div>

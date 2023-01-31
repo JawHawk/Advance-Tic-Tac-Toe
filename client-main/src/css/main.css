@@ -3,6 +3,10 @@
     text-align: center;
     flex-direction: column;
     height: 85vh;
+    font-size: 1.75rem;
+}
+.parent span {
+    color: rgb(39, 125, 165);
 }
 
 .child{

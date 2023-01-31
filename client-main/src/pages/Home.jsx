@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Main from './Main'
+import Main from '../components/Main'
 import { ResetProvider } from './resetContext'
 
 class Home extends Component {
@@ -10,11 +10,7 @@ class Home extends Component {
       reset:false
     }
   }
-  componentDidMount(){
-    alert("Hii there, this is advance Tic-Tac-Toe where X's & O's are of 4 sizes. Each greater size can overlap its smaller size & moves are limited. Rest rules are same, but its more fun !!! Circle starts first here ...")
-  }
   checkWin = (board) => {
-    console.log('checkwin ran');
     const winConditions = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
     const circle = board.reduce((total,el,ind)=>{
         if (el === 'circle') { total.push(ind) } 
@@ -36,13 +32,22 @@ class Home extends Component {
         if(cc){
           alert('Circle Wins. Noob cross user -_- ');
         } else {
-          alert('Cross Wins. Noob circle user -_- ')
+          alert('Cross Wins. Noob circle user -_- ');
         }
       }
     }  
   }
 
+  componentDidMount() {
+    const {socket} = this.props;
+    socket.on('reset-update',()=> {
+      this.setState({reset:true},()=>{this.setState({reset:false})})
+    })
+  }
+
   reset = () => {
+    const {socket,roomId} = this.props;
+    socket.emit('reset-done',roomId);
     this.setState({reset:true},()=>{this.setState({reset:false})})
   }
 
@@ -53,12 +58,17 @@ class Home extends Component {
           border:'1px solid black',
           borderRadius:'10px'}
     return (
-      <div>
-        <ResetProvider value={this.state.reset}>
-            <Main checkWin={this.checkWin}/>
+      <>
+        <ResetProvider value={{reset: this.state.reset,
+          playerNum: this.props.playerNum,
+          socket: this.props.socket ,
+          roomId : this.props.roomId }}>
+
+            <Main checkWin={this.checkWin} />
+
         </ResetProvider>
-        <button style={btnStyle} onClick={this.reset}>Reset</button>
-      </div>
+        <button className="btn btn-dark px-3 py-2" onClick={this.reset}>Reset Board</button>
+      </>
     )
   }
 }

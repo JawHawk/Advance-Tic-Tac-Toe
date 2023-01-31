@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import ResetContext from '../pages/resetContext';
 import SideBar from './SideBar';
 
 class RightSideBar extends Component {
     select = n => {
         const {turn,makeChoice} = this.props
-        if(turn === 'cross'){
+        if((turn === 'cross') && (this.context.playerNum == 2)){
           makeChoice(n)
           return true
         } else {
@@ -15,11 +16,12 @@ class RightSideBar extends Component {
 
   render() {
     return (
-      <div>
+      <>
           <SideBar side='right' select={this.select} moves={this.props.rmoves}/>
-      </div>
+      </>
     )
   }
 }
 
+RightSideBar.contextType = ResetContext;
 export default RightSideBar

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Box from './Box'
-import ResetContext from './resetContext'
+import ResetContext from '../pages/resetContext'
 import '../css/sidebar.css'
 
 function initialState(){
@@ -38,12 +38,14 @@ class SideBar extends Component {
     
     return (
       <div>
-        <h2>{status} | Moves</h2>
+        <p className='lead' style={{fontSize:'2rem'}}>
+          {side === 'left' ? 'Player 1' : 'Player 2' } | Moves
+        </p>
         <div className='SBparent'>
           {size.map((item,ind) => 
             <div className='SBchild' onClick={()=>{this.selection(ind)}} key={ind}>
                   <Box status={status} highlight={ind === choice ? true : false} size={item} />
-                  <h2>{moves[ind]}</h2>
+                  <p className='lead' style={{fontWeight:'400',fontSize:'2rem'}}>{moves[ind]}</p>
             </div> )}
         </div>
       </div>

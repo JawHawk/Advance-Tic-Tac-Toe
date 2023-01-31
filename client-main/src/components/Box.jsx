@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import circle from '../assets/circle.png'
 import cross from '../assets/cross.png'
-import ResetContext from './resetContext'
+import ResetContext from '../pages/resetContext'
 
 const initialState = {
   sizes : ['30px','45px','60px','75px']
@@ -14,7 +14,7 @@ class Box extends Component {
     }
 
     componentDidUpdate(){
-      if (this.context === true){
+      if (this.context.reset === true){
         this.setState(initialState)
       }
     }
@@ -29,7 +29,10 @@ class Box extends Component {
         padding:'5px',
         cursor:'pointer',
         borderRadius:'10px',
-        background:'#F9CB86'
+        background:'#F9CB86',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems:'center'
     }
     if(highlight){
       boxStyle['border'] = '2px solid blue'
@@ -40,10 +43,7 @@ class Box extends Component {
 
     const imgStyle = {
         width: sizes[size],
-        heigh: sizes[size],
-        position: 'relative',
-        top:'50%',
-        transform: 'translateY(-50%)'
+        height: sizes[size]
     }
     return (
       <div style={boxStyle}>
