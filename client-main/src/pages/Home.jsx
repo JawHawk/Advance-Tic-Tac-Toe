@@ -67,7 +67,7 @@ class Home extends Component {
             <Main checkWin={this.checkWin} />
 
         </ResetProvider>
-        <button className="btn btn-dark px-3 py-2" onClick={this.reset}>Reset Board</button>
+        <button className="btn btn-outline-dark px-3 py-2" onClick={this.reset}>Reset Board</button>
       </>
     )
   }

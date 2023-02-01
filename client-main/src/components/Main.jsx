@@ -4,13 +4,18 @@ import LeftSideBar from './LeftSideBar'
 import ResetContext from '../pages/resetContext'
 import RightSideBar from './RightSideBar'
 import '../css/main.css'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
 
 function initialState(){
   return {
     turn:'circle',
     choice: null,
     lmoves:[3,2,2,2],
-    rmoves:[3,2,2,2]
+    rmoves:[3,2,2,2],
+    show: false
   }
 }
 
@@ -69,16 +74,37 @@ class Main extends Component {
     this.setState({choice:n})
   }
 
+  copyRoom = (roomId) => {
+    navigator.clipboard.writeText(roomId);
+    this.setState({show: true});
+  }
   render() {
     const { turn , choice, lmoves,rmoves} = this.state;
+    const {roomId} = this.context;
+
     return (
       <div className='parent'>
         <p>
-          Turn of: <span>{turn === 'circle' ? 'Player 1' : 'Player 2'}</span> 
+        Turn of: <span>{turn === 'circle' ? 'Player 1' : 'Player 2'}</span> 
         </p>
         <p>
           Current Selection: <span>{ choice === null ? 'None' : turn +' '+choice}</span>
         </p>
+        <div className='roomIdInfo'>
+          <button className='btn btn-outline-dark' onClick={() => {this.copyRoom(roomId)}}>Room Id: {roomId}</button>
+        </div>
+
+        <Row>
+          <Col xs={6}>
+            <Toast className='toast' onClose={() => this.setState({show:false})} show={this.state.show} delay={3000} autohide>
+              <Toast.Header>
+                <strong className="me-auto">Notification</strong>
+              </Toast.Header>
+              <Toast.Body>Room Id copied to clipboard.</Toast.Body>
+            </Toast>
+          </Col>
+        </Row>
+
         <div className='child'>
             <LeftSideBar makeChoice={this.makeChoice} turn={turn} lmoves={lmoves}/>
             <Board changeTurn={this.changeTurn} changeTurnSocket={this.changeTurnSocket} checkWin={this.props.checkWin}/>
