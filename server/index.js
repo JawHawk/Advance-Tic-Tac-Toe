@@ -5,7 +5,6 @@ const cors = require('cors');
 const PORT = 3001
 app.use(cors());
 
-
 const io = require('socket.io')(PORT, {
     cors: {
         origin: "*",
@@ -13,8 +12,16 @@ const io = require('socket.io')(PORT, {
    } 
 })
 
+app.get('/',async function(req, res) {
+  const data = await scraper();
+  res.json(data);
+});
+
+app.listen(3002 , function() {
+  console.log("Server is running");
+});
+
 io.on("connection", socket => {
-    console.log(socket.id);
     socket.on('custom', (message,room)=> {
         socket.to(room).emit('receive-message',message);
     })
@@ -43,6 +50,5 @@ io.on("connection", socket => {
 
     socket.on('move-done',({ roomId , elements, board})=>{
       socket.to(roomId).emit('move-update',{elements: elements, board: board});
-      console.log(elements, board);
     });
 })
