@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-const PORT = 3001
+const PORT = 3000
 app.use(cors());
 
 const io = require('socket.io')(PORT, {
@@ -11,15 +11,6 @@ const io = require('socket.io')(PORT, {
         methods:["GET","POST","DELETE"],
    } 
 })
-
-app.get('/',async function(req, res) {
-  const data = await scraper();
-  res.json(data);
-});
-
-app.listen(3002 , function() {
-  console.log("Server is running");
-});
 
 io.on("connection", socket => {
     socket.on('custom', (message,room)=> {
