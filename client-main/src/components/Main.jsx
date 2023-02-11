@@ -4,7 +4,6 @@ import LeftSideBar from './LeftSideBar'
 import ResetContext from '../pages/resetContext'
 import RightSideBar from './RightSideBar'
 import '../css/main.css'
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';

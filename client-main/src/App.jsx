@@ -4,7 +4,7 @@ import Landing from './pages/Landing'
 import { useState,useEffect } from 'react';
 import {io} from 'socket.io-client';
 
-const socket = io('https://advance-tictactoe-server.onrender.com:3002/',{secure: true})
+const socket = io('http://localhost:3001/',{secure: true})
 socket.on('connect',()=>{
   console.log('client ID',socket.id);
 })
@@ -13,7 +13,7 @@ function App() {
   const [RoomId, setRoomId] = useState({roomId: null,create: false});
   const [Play, setPlay] = useState(false);
   const [PlayerNum, setPlayerNum] = useState();
-  
+
   useEffect(() => {
     if(RoomId.roomId){
       console.log(RoomId.roomId);

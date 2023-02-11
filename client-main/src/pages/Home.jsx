@@ -52,11 +52,6 @@ class Home extends Component {
   }
 
   render() {
-    const btnStyle = {background:'lightblue',
-          cursor:'pointer',
-          padding:'10px',
-          border:'1px solid black',
-          borderRadius:'10px'}
     return (
       <>
         <ResetProvider value={{reset: this.state.reset,

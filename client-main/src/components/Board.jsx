@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Box from './Box'
 import ResetContext from '../pages/resetContext'
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
 
 function initialState(){
   const elements = []
@@ -9,7 +12,7 @@ function initialState(){
     elements.push({ id:i, status : null, size : null })
     board.push(null)
   }
-  return {elements, board}
+  return {elements, board, show: false}
 } 
 
 class Board extends Component {
@@ -25,7 +28,7 @@ class Board extends Component {
       this.setState({elements: elements, board: board},()=>{
         this.props.checkWin(board);
       });
-    })
+    });
   } 
 
   componentDidUpdate(){
@@ -37,19 +40,26 @@ class Board extends Component {
   boxClick = n => {
     const { socket, roomId } = this.context 
     var {elements,board} = this.state
-    const [flag,turn,choice] = this.props.changeTurn(elements[n].status,elements[n].size);
-    if (flag) {
-      elements[n] = {
-        id: n,
-        status: turn,
-        size: choice
+    socket.emit('play-move',roomId);
+    socket.once('play',(bool)=>{
+      if(bool) {
+        const [flag,turn,choice] = this.props.changeTurn(elements[n].status,elements[n].size);
+        if (flag) {
+          elements[n] = {
+            id: n,
+            status: turn,
+            size: choice
+          }
+          board[n] = turn
+          this.setState({elements:elements,board:board},()=>{
+            socket.emit('move-done',{roomId: roomId, elements: elements, board: board});
+            this.props.checkWin(board);
+          })
+        } 
+      } else {
+        this.setState({show : true});
       }
-      board[n] = turn
-      this.setState({elements:elements,board:board},()=>{
-        socket.emit('move-done',{roomId: roomId, elements: elements, board: board});
-        this.props.checkWin(board);
-      })
-    } 
+    })
     
   }
 
@@ -66,6 +76,16 @@ class Board extends Component {
             {elements.map(el => <div key={el.id} className='d-flex justify-content-center' onClick={()=>{this.boxClick(el.id)}}>
               <Box status={el.status} highlight={false} size={el.size}/> </div>)}
         </div>
+        <Row>
+          <Col xs={6}>
+            <Toast className='toast' onClose={() => this.setState({show:false})} show={this.state.show} delay={3000} autohide>
+              <Toast.Header>
+                <strong className="me-auto">Notification</strong>
+              </Toast.Header>
+              <Toast.Body>Wait till Player 2 Joins !</Toast.Body>
+            </Toast>
+          </Col>
+        </Row>
       </div>
     )
   }
