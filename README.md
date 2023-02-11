@@ -1,8 +1,8 @@
 Advance Tic-Tac-Toe project is built using React class components.
 
-## Available Scripts
+## Client-Main
 
-In the project directory, you can run:
+In the client-main directory, you can run:
 
 ### `npm start`
 
@@ -37,32 +37,38 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Server
+### Requirements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For development, you will only need Node.js and a node global package.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Node
+- #### Node installation on Windows
 
-### Code Splitting
+  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
+Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- #### Node installation on Ubuntu
 
-### Analyzing the Bundle Size
+  You can install nodejs and npm easily with apt install, just run the following commands.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+      $ sudo apt install nodejs
+      $ sudo apt install npm
 
-### Making a Progressive Web App
+- #### Other Operating Systems
+  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Install
+    $ git clone https://github.com/JawHawk/Advance-Tic-Tac-Toe.git
+    $ cd server
+    $ npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Running the project
 
-### Deployment
+    $ npm run start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Simple build for production
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    $ npm run build
