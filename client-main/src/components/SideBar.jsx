@@ -39,7 +39,7 @@ class SideBar extends Component {
     return (
       <div>
         <p className='lead' style={{fontSize:'2rem'}}>
-          {side === 'left' ? 'Player 1' : 'Player 2' } | Moves
+          {side === 'left' ? 'Player 1' : 'Player 2' } | Moves Left
         </p>
         <div className='SBparent'>
           {size.map((item,ind) => 

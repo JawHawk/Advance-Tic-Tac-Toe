@@ -82,7 +82,7 @@ class Board extends Component {
               <Toast.Header>
                 <strong className="me-auto">Notification</strong>
               </Toast.Header>
-              <Toast.Body>Wait till Player 2 Joins !</Toast.Body>
+              <Toast.Body>Wait till other Player Joins !</Toast.Body>
             </Toast>
           </Col>
         </Row>

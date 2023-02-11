@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Fade from 'react-bootstrap/Fade';
 
@@ -6,7 +6,6 @@ import Fade from 'react-bootstrap/Fade';
 export default function Landing({setRoomId}) {
   const [collapseOpen, setcollapseOpen] = useState(false);
   const [room, setroom] = useState(null)
-
   function createRoom(){
     setRoomId(
       {roomId:String(Math.floor(Math.random()*10000000)), create: true}

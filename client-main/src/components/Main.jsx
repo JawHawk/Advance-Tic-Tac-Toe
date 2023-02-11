@@ -87,7 +87,7 @@ class Main extends Component {
         Turn of: <span>{turn === 'circle' ? 'Player 1' : 'Player 2'}</span> 
         </p>
         <p>
-          Current Selection: <span>{ choice === null ? 'None' : turn +' '+choice}</span>
+          Selection: <span>{ choice === null ? 'None' : turn +' '+choice}</span>
         </p>
         <div className='roomIdInfo'>
           <button className='btn btn-outline-dark' onClick={() => {this.copyRoom(roomId)}}>Room Id: {roomId}</button>
