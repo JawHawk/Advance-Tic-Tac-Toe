@@ -10,7 +10,7 @@ function initialState(){
   const board = []
   for (let i = 0; i <= 8; i++) {
     elements.push({ id:i, status : null, size : null })
-    board.push(null)
+    // board.push({status:null,})
   }
   return {elements, board, show: false}
 } 
@@ -24,9 +24,9 @@ class Board extends Component {
   componentDidMount() {
     const {socket} = this.context;
     socket.on('move-update',({elements, board})=> {
-      this.props.changeTurnSocket(elements);
       this.setState({elements: elements, board: board},()=>{
-        this.props.checkWin(board);
+        this.props.changeTurnSocket(board);
+        this.props.checkWin(elements);
       });
     });
   } 
@@ -40,6 +40,7 @@ class Board extends Component {
   boxClick = n => {
     const { socket, roomId } = this.context 
     var {elements,board} = this.state
+
     socket.emit('play-move',roomId);
     socket.once('play',(bool)=>{
       if(bool) {
@@ -50,10 +51,11 @@ class Board extends Component {
             status: turn,
             size: choice
           }
-          board[n] = turn
+          // board[n] = turn
+          board.push({status:turn,size: choice})
           this.setState({elements:elements,board:board},()=>{
             socket.emit('move-done',{roomId: roomId, elements: elements, board: board});
-            this.props.checkWin(board);
+            this.props.checkWin(elements);
           })
         } 
       } else {

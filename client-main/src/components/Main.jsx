@@ -30,10 +30,10 @@ class Main extends Component {
     }
   }
 
-  changeTurnSocket = elements => {
+  changeTurnSocket = board => {
     var lmoves = [3,2,2,2];
     var rmoves = [3,2,2,2];
-    for( const el of elements ){
+    for( const el of board ){
       if(el.status == 'circle'){
         lmoves[el.size] -= 1;
       } 
@@ -50,15 +50,15 @@ class Main extends Component {
     if (choice !== null && status !== turn) {
       if (size === null || choice > size ) {
         var moves;
-        turn == 'circle' ? moves = this.state.lmoves : moves = this.state.rmoves;
+        turn == 'circle' ? moves = [...this.state.lmoves] : moves = [...this.state.rmoves];
         if (moves[choice] > 0){
           moves[choice] -= 1
         } else {
           alert('No moves');
           return [false,turn,choice]
         }
-        turn == 'circle' ? this.setState({turn: 'cross',choice:null,lmoves:moves})
-        : this.setState({turn: 'circle',choice:null,rmoves:moves});
+        turn == 'circle' ? this.setState({turn: 'cross',choice:null,lmoves:[...moves]})
+        : this.setState({turn: 'circle',choice:null,rmoves:[...moves]});
         return [true,turn,choice]
       } else {
         alert('Select greater size');
@@ -106,7 +106,7 @@ class Main extends Component {
 
         <div className='child'>
             <LeftSideBar makeChoice={this.makeChoice} turn={turn} lmoves={lmoves}/>
-            <Board changeTurn={this.changeTurn} changeTurnSocket={this.changeTurnSocket} checkWin={this.props.checkWin}/>
+            <Board changeTurn={this.changeTurn} changeTurnSocket={this.changeTurnSocket} checkWin={this.props.checkWin} lmoves={lmoves} rmoves={rmoves} />
             <RightSideBar makeChoice={this.makeChoice} turn={turn} rmoves={rmoves}/>
         </div>
       </div>
