@@ -39,7 +39,7 @@ function App() {
         {
           !Play ? <>
           <Landing setRoomId={setRoomId} connect={connect}/>
-          <p className='lead'>Made by Chinmay aka Jawhawk</p>
+          <p className='lead'>Made by Chinmay aka <a href="https://github.com/JawHawk">Jawhawk</a></p>
           </> 
           : <Home playerNum={PlayerNum} socket={socket} roomId={RoomId.roomId} />
         }

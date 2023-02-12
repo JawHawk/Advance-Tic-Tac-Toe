@@ -1,8 +1,9 @@
 .SBparent{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     align-items: center;
+    margin: 30px 0 0 50px;
 }
 
 .SBchild{
@@ -10,13 +11,31 @@
     gap: 30px;
     align-items: center;
 }
+.SBchild .moves {
+    background: black;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: relative;
+    right: 45px;
+    bottom: 35px;
+}
 
 @media only screen and (max-width: 830px) {
     .SBchild{
         flex-direction: column;
     }
+    .SBchild .moves {
+        position: relative;
+        right: 0;
+        bottom: 20px;
+    }
     .SBparent{
         flex-direction: row;
         justify-content: space-evenly;
+        margin: 0;
     }
   }

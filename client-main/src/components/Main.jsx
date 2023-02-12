@@ -79,15 +79,20 @@ class Main extends Component {
   }
   render() {
     const { turn , choice, lmoves,rmoves} = this.state;
-    const {roomId} = this.context;
-
+    const {roomId,playerNum } = this.context;
     return (
       <div className='parent'>
-        <p>
-        Turn of: <span>{turn === 'circle' ? 'Player 1' : 'Player 2'}</span> 
+        <p><span>
+        {
+          playerNum === 1 ? (
+            turn === 'circle' ? 'Your Turn (Player 1)' : 'Opponent Turn (Player 2)'
+          ) : (
+            turn === 'cross' ? 'Your Turn (Player 2)' : 'Opponent Turn (Player 1)'
+          )
+        }</span>
         </p>
         <p>
-          Selection: <span>{ choice === null ? 'None' : turn +' '+choice}</span>
+          Selection: <span>{ choice === null ? 'None' : turn +' '+(choice+1)}</span>
         </p>
         <div className='roomIdInfo'>
           <button className='btn btn-outline-dark' onClick={() => {this.copyRoom(roomId)}}>Room Id: {roomId}</button>

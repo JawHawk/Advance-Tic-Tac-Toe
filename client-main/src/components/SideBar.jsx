@@ -39,13 +39,14 @@ class SideBar extends Component {
     return (
       <div>
         <p className='lead' style={{fontSize:'2rem'}}>
-          {side === 'left' ? 'Player 1' : 'Player 2' } | Moves Left
+          {side === 'left' ? 'Player 1' : 'Player 2' }
         </p>
+        <hr />
         <div className='SBparent'>
           {size.map((item,ind) => 
             <div className='SBchild' onClick={()=>{this.selection(ind)}} key={ind}>
                   <Box status={status} highlight={ind === choice ? true : false} size={item} />
-                  <p className='lead' style={{fontWeight:'400',fontSize:'2rem'}}>{moves[ind]}</p>
+                  <p className='moves lead'>x{moves[ind]}</p>
             </div> )}
         </div>
       </div>
