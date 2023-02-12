@@ -5,15 +5,20 @@ import { useState,useEffect } from 'react';
 import {io} from 'socket.io-client';
 
 const socket = io('https://advance-tictactoe-server.onrender.com/',{secure: true})
-socket.on('connect',()=>{
-  console.log('connected to socket');
-})
+
 
 function App() {
   const [RoomId, setRoomId] = useState({roomId: null,create: false});
   const [Play, setPlay] = useState(false);
   const [PlayerNum, setPlayerNum] = useState();
-  
+  const [connect, setconnect] = useState(false);
+
+  useEffect(()=>{
+    socket.on('connect',()=>{
+      setconnect(true);
+    })
+  },[])
+
   useEffect(() => {
     if(RoomId.roomId){
       RoomId.create ? socket.emit('create-room',RoomId.roomId)
@@ -31,9 +36,10 @@ function App() {
   
   return (
       <div className="App">
+        
         {
           !Play ? <>
-          <Landing setRoomId={setRoomId} play={Play} />
+          <Landing setRoomId={setRoomId} connect={connect}/>
           <p className='lead'>Made by Chinmay aka Jawhawk</p>
           </> 
           : <Home playerNum={PlayerNum} socket={socket} roomId={RoomId.roomId} />

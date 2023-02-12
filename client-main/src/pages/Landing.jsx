@@ -3,16 +3,21 @@ import { useState } from 'react'
 import Fade from 'react-bootstrap/Fade';
 
  
-export default function Landing({setRoomId}) {
+export default function Landing({setRoomId,connect}) {
   const [collapseOpen, setcollapseOpen] = useState(false);
   const [room, setroom] = useState(null)
+  
   function createRoom(){
     setRoomId(
       {roomId:String(Math.floor(Math.random()*10000000)), create: true}
     );
-  }
+  } 
 
   return (
+    <>
+    <button >
+      {!connect ? 'Connecting to socket ...' : 'Connected, you can play now !!'}
+    </button>
     <div className='d-flex flex-column justify-content-center gap-5' style={{height: '75vh'}}>
         <p className='display-1 '>Advance Tic Tac Toe</p>
         <div className='d-flex justify-content-center gap-5'>
@@ -37,5 +42,6 @@ export default function Landing({setRoomId}) {
           </div>
         </Fade>
     </div>
+    </>
   )
 }
