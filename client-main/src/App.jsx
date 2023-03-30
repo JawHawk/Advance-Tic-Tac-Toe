@@ -4,7 +4,7 @@ import Landing from './pages/Landing'
 import { useState,useEffect } from 'react';
 import {io} from 'socket.io-client';
 
-const socket = io('https://advance-tictactoe-server.onrender.com/',{secure: true})
+const socket = io(import.meta.env.VITE_SERVER,{secure: true})
 
 function App() {
   const [RoomId, setRoomId] = useState({roomId: null,create: false});
