@@ -1,4 +1,4 @@
-Advance Tic-Tac-Toe project is built using React class components.
+Advance Tic-Tac-Toe is built using React and Socket.io .
 
 ## Client-Main
 
