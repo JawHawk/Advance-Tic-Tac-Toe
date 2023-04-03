@@ -82,6 +82,7 @@ class Main extends Component {
     const {roomId,playerNum } = this.context;
     return (
       <div className='parent'>
+        <div className="turnInfo">
         <p><span>
         {
           playerNum === 1 ? (
@@ -94,9 +95,8 @@ class Main extends Component {
         <p>
           Selection: <span>{ choice === null ? 'None' : turn +' '+(choice+1)}</span>
         </p>
-        <div className='roomIdInfo'>
-          <button className='btn btn-outline-dark' onClick={() => {this.copyRoom(roomId)}}>Room Id: {roomId}</button>
         </div>
+          <button className='roomIdInfo btn btn-outline-dark' onClick={() => {this.copyRoom(roomId)}}>Room Id: {roomId}</button>
 
         <Row>
           <Col xs={6}>

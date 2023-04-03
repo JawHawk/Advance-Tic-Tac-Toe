@@ -26,16 +26,24 @@
 
 @media only screen and (max-width: 830px) {
     .SBchild{
+        display: flex;
         flex-direction: column;
+        gap: 5px ;
     }
     .SBchild .moves {
-        position: relative;
         right: 0;
-        bottom: 20px;
+        bottom: 0;
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
     }
     .SBparent{
         flex-direction: row;
         justify-content: space-evenly;
         margin: 0;
     }
+    .playerLead{
+        margin: 10px 0 0 0 !important;
+    }
+
   }

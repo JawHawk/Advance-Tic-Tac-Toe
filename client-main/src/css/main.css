@@ -31,8 +31,32 @@ justify-content: space-between;
 @media only screen and (max-width: 830px) {
     .child{
         flex-direction: column;
+        gap: 0;
     }
     .parent{
         height: max-content;
+    }
+    .roomIdInfo{
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 180px;
+        padding: 2px 0 !important;
+    }
+    .turnInfo{
+        margin-top: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding-bottom: 0.75rem;
+        border-radius: 15px;
+        border-bottom:1px solid rgb(39, 125, 165) ;
+    }
+    .turnInfo p{
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    .toast{
+        right: 10px;
     }
   }

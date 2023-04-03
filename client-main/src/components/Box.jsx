@@ -3,14 +3,23 @@ import circle from '../assets/circle.png'
 import cross from '../assets/cross.png'
 import ResetContext from '../pages/resetContext'
 
-const initialState = {
-  sizes : ['30px','45px','60px','75px']
-}
+function initialState(){
+  if(window.innerWidth > 550) {
+    return ({ sizes : ['30px','45px','60px','75px'] })
+  } else {
+    return ({ sizes : ['15px', '25px','35px', '50px']})
+  }
+} 
 
 class Box extends Component {
     constructor(props) {
       super(props)
-      this.state = initialState
+      this.state = initialState();
+    }
+    componentDidMount() {
+      window.addEventListener('resize', () => {
+        this.setState(initialState);
+      })
     }
 
     componentDidUpdate(){
